@@ -15,7 +15,22 @@ do{
     scanf("%f", &num2);
 }while(num2<=0);
 
-printf("Vysledok je: %f", num1 + num2);
+do{
+    printf("Zadaj znak: ");
+    scanf("%s", znak);
+}while(znak!='+' || znak!='-' || znak!='*' || znak!='/');
+
+if(znak=='+'){
+    printf("Vysledok je: %f", num1 + num2);
+}else if(znak=='-'){
+    printf("Vysledok je: %f", num1 - num2);
+}else if(znak=='*'){
+    printf("Vysledok je: %f", num1 * num2);
+}else if(znak=='/'){
+    printf("Vysledok je: %f", num1 / num2);
+}
+
+
 
 
 return 0;
