@@ -7,9 +7,9 @@ int cislo, i, vysledok;
 printf("Zadaj cislo: ");
 scanf("%d", &cislo);
 
-for(i=0; i<=cislo; i++){
+for(i=cislo; i>=0; i--){
     if(i%2==0 || i%3==0){
-       printf("%d", i); 
+       printf("%d ", i); 
     }else continue;
     
 }
