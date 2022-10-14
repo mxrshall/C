@@ -1,41 +1,33 @@
-#include<stdio.h>
+#include <stdio.h>
 
 int main(void){
 
-int a, b, x;
-int vysledok2=0, vysledok3=0;
+int cislo, delitelne2=0, delitelne3=0;
 
-while (1){
+do{
     printf("Zadaj cislo: ");
-    scanf("%d %d", &a, &b);
+    scanf("%d", &cislo);
 
-    if(a==0 || b==0){
+    if(cislo==0){
         goto end;
     }
-
-    if(a>b){
-        x=a;
-        a=b;
-        b=x;
+    if(cislo%2==0){
+        printf("Cislo je delitelne 2.\n");
+        delitelne2++;
     }
-
-    if(a<b){
-        for(a; a<=b; a++){
-            if(a%2==0){
-                vysledok2++;
-            }
-            if(a%3==0){
-                vysledok3++;
-            }
-        }
+    if(cislo%3==0){
+        printf("Cislo je delitelne 3.\n");
+        delitelne3++;
     }
-    printf("V postupnosti sa nachadza %d cisel delitelnych dvojkou.\n", vysledok2);
-    printf("V postupnosti sa nachadza %d cisel delitelnych trojkou.\n", vysledok3);
+    if(cislo%2==1 || cislo%3==1){
+        printf("Cislo nieje delitelne 2 ani 3.\n");
+    }
+    
+    printf("Ak chces program ukoncit zadajte 0.\n");
 
-    vysledok2=0;
-    vysledok3=0;
-}
-
-    end: //goto end;
+}while(cislo!=0);
+    end:
+    printf("%d", delitelne2);
+    printf("%d", delitelne3);
     return 0;
 }
