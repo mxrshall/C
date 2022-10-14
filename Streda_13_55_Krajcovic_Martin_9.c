@@ -4,7 +4,7 @@ int main(void){
 
 int cislo, delitelne2=0, delitelne3=0;
 
-do{
+while (1){
     printf("Zadaj cislo: ");
     scanf("%d", &cislo);
 
@@ -25,9 +25,9 @@ do{
     
     printf("Ak chces program ukoncit zadajte 0.\n");
 
-}while(cislo!=0);
+}
     end:
-    printf("%d", delitelne2);
-    printf("%d", delitelne3);
+    printf("Cislo je dvojkou delitene %d krat.\n", delitelne2);
+    printf("Cislo je trojkou delitene %d krat.\n", delitelne3);
     return 0;
 }
