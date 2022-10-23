@@ -15,7 +15,7 @@ for(i=0;i<pocetbodov;i++){
 
 najmensi[0]=bodyX[0]+bodyY[0];
 
-for(i=1;i<pocetbodov;i++){
+for(i=0;i<pocetbodov;i++){
     if(bodyX[i]<0){
         bodyX[i]=bodyX[i]*(-1);
         najmensi[i]=bodyX[i]+bodyY[i];
@@ -34,7 +34,7 @@ for(i=1;i<pocetbodov;i++){
         if(najmensi[i]<najmensi[0]){
             najmensi[0]=najmensi[i];
             bodyY[i]=bodyY[i]*(-1);
-            bodyY[0]=bodyX[i];
+            bodyX[0]=bodyX[i];
             bodyY[0]=bodyY[i];
         }
     }
