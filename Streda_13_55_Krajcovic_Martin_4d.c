@@ -14,10 +14,22 @@ vypocet(n);
 }
 
 void vypocet(int n){
-    int i, vysledok=1;
+    int i, opakovanie, vysledok;
 
     for(i=1;i<=20;i++){
-        vysledok=i*n;
-        printf("%d\n", vysledok);
+        if(n==1){
+            printf("%d mocnina z %d je %d\n", n, i, i);
+        }else if(n==2){
+            vysledok=i*i;
+            printf("Vysledok je %d\n", vysledok);
+        }else{
+            vysledok=i*i;
+            for(opakovanie=3;opakovanie<=n;opakovanie++){
+                vysledok=vysledok*i;
+            }
+            printf("Vysledok je %d\n", vysledok);
+            vysledok=0;
+        }
+        
     }
 }
