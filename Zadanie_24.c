@@ -3,7 +3,7 @@
 
 int main(void){
 
-float mat[MAX] [MAX+1];
+float mat[MAX][MAX];
 int i, j;
 
 for (i=0;i<4;i++){
