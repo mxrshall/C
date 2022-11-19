@@ -1,0 +1,13 @@
+Ahoj
+Tvoje cislo 4
+Tvoje cislo 0
+Tvoje cislo 1
+Tvoje cislo 2
+Tvoje cislo 3
+Tvoje cislo 4
+Tvoje cislo 5
+Tvoje cislo 6
+Tvoje cislo 7
+Tvoje cislo 8
+Tvoje cislo 9
+Tvoje cislo 10
