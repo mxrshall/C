@@ -14,7 +14,7 @@ int main(void){
 }
 
 int premena(long long cislo){
-int des=0, i=0, posledne;
+  int des=0, i=0, posledne;
 
   while (cislo!=0){
     posledne=cislo%10;
