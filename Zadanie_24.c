@@ -3,36 +3,40 @@
 #define MAX 100
 
 int premena(long long cislo);
+int nacitanie(int mat[MAX][MAX], int r, int s);
 
 int main(void){
 
 int mat[MAX][MAX];
 long long cislo;
-int r, s; //riadok, stlpec
+int r, s, i, j; //riadok, stlpec
 
-for(r=0;r<2;r++){
-    for(s=0;s<2;s++){
-        printf("Zadaj prvok matice [%d][%d]\n", r, s);
+while(r<1 || s<1){
+    printf("Zadaj pocet riadkov: ");
+    scanf("%d", &r);
+    printf("Zadaj pocet stlpcov: ");
+    scanf("%d", &s);
+}
+
+for(i=0;i<r;i++){
+    for(j=0;j<s;j++){
+        printf("Zadaj prvok matice v dvojkovej sustave[%d][%d]\n", i, j);
         scanf("%lld", &cislo);
-        mat[r][s]=premena(cislo);
+        mat[i][j]=premena(cislo);
     }
 }
 
 printf("Toto je tvoja matica.\n");
-for(r=0;r<2;r++){
-    for(s=0;s<2;s++){
-        printf("%d\t", mat[r][s]);    
-    }
-    printf("\n");
-}
+nacitanie(mat[MAX][MAX], r, s);
     
     return 0;
 }
 
 int premena(long long cislo){
+
 int des=0, i=0, posledne;
 
-while (cislo!=0){
+while(cislo!=0){
     posledne=cislo%10;
     cislo=cislo/10;
     des=des+posledne*pow(2, i);
@@ -40,4 +44,16 @@ while (cislo!=0){
 }
 
   return des;
+}
+
+int nacitanie(int mat[MAX][MAX], int r, int s){
+
+int i, j;
+
+for(i=0;i<r;i++){
+    for(j=0;j<s;j++){
+        return mat[i][j];    
+    }
+    printf("\n");
+}
 }
