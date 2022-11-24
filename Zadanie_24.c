@@ -3,10 +3,10 @@
 #define MAX 100
 
 int premena(long long cislo);
-int nacitanie(int mat[MAX][MAX], int r, int s);
 
 int main(void){
 
+FILE *f_output;
 int mat[MAX][MAX];
 long long cislo;
 int r, s, i, j; //riadok, stlpec
@@ -22,17 +22,32 @@ for(i=0;i<r;i++){
     for(j=0;j<s;j++){
         printf("Zadaj prvok matice v dvojkovej sustave[%d][%d]\n", i, j);
         scanf("%lld", &cislo);
-        mat[i][j]=premena(cislo);
+        mat[i][j]=cislo;
+        //mat[i][j]=premena(cislo);
     }
 }
 
-printf("Toto je tvoja matica.\n");
-nacitanie(mat[MAX][MAX], r, s);
+f_output = fopen("subor.txt", "w"); //zapis
+
+if(f_output==NULL){
+    printf("Chyba pri otvarani.\n");
+    return 1;
+}
+
+fprintf(f_output, "Toto je tvoja matica v dvojkovej sustave.\n");
+for (i=0;i<r;i++){
+    for (j=0;j<s;j++){
+        fprintf(f_output, "%d\t", mat[i][j]);    
+    }
+    fprintf(f_output, "\n");
+}
+
+fclose(f_output);
     
     return 0;
 }
 
-int premena(long long cislo){
+int premena(long long cislo){ //funkcia premena
 
 int des=0, i=0, posledne;
 
@@ -44,16 +59,4 @@ while(cislo!=0){
 }
 
   return des;
-}
-
-int nacitanie(int mat[MAX][MAX], int r, int s){
-
-int i, j;
-
-for(i=0;i<r;i++){
-    for(j=0;j<s;j++){
-        return mat[i][j];    
-    }
-    printf("\n");
-}
 }
