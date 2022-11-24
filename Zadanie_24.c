@@ -3,10 +3,11 @@
 #define MAX 100
 
 int premena(long long cislo);
+int nacitanie(int r, int s);
 
 int main(void){
 
-FILE *f_output;
+FILE *subor;
 int mat[MAX][MAX];
 long long cislo;
 int r, s, i, j; //riadok, stlpec
@@ -27,22 +28,31 @@ for(i=0;i<r;i++){
     }
 }
 
-f_output = fopen("subor.txt", "w"); //zapis
+subor = fopen("subor.txt", "w"); //zapis
 
-if(f_output==NULL){
+if(subor==NULL){
     printf("Chyba pri otvarani.\n");
     return 1;
 }
 
-fprintf(f_output, "Toto je tvoja matica v dvojkovej sustave.\n");
+fprintf(subor, "Toto je tvoja matica v dvojkovej sustave.\n");
 for (i=0;i<r;i++){
     for (j=0;j<s;j++){
-        fprintf(f_output, "%d\t", mat[i][j]);    
+        fprintf(subor, "%d\t", mat[i][j]);    
     }
-    fprintf(f_output, "\n");
+    fprintf(subor, "\n");
 }
 
-fclose(f_output);
+fclose(subor);
+
+printf("Toto je tvoja matica v desiatkovej sustave.\n");
+for (i=0;i<r;i++){
+    for (j=0;j<s;j++){
+        cislo=mat[i][j];
+        printf("%d\t", premena(cislo));    
+    }
+    printf("\n");
+}
     
     return 0;
 }
@@ -59,4 +69,20 @@ while(cislo!=0){
 }
 
   return des;
+}
+
+int nacitanie(int r, int s){ //funckia nacitanie
+
+int mat[MAX][MAX];
+int i, j;
+long long cislo;
+
+for (i=0;i<r;i++){
+    for (j=0;j<s;j++){
+        mat[i][j]=premena(cislo);
+        return mat[i][j];    
+    }
+    printf("\n");
+}
+
 }
