@@ -24,13 +24,11 @@ for(i=0;i<r;i++){
         printf("Zadaj prvok matice v dvojkovej sustave[%d][%d]\n", i, j);
         scanf("%lld", &cislo);
         mat[i][j]=cislo;
-        //mat[i][j]=premena(cislo);
     }
 }
 
 subor = fopen("subor.txt", "w"); //zapis
 
-//fprintf(subor, "Toto je tvoja matica v dvojkovej sustave.\n");
 for(i=0;i<r;i++){
     for(j=0;j<s;j++){
         fprintf(subor, "%d\n", mat[i][j]);    
@@ -39,6 +37,7 @@ for(i=0;i<r;i++){
 
 fclose(subor);
 
+printf("Toto je tvoja matica v desiatkovej sustave.\n");
 nacitanie(r, s);
     
     return 0;
@@ -58,14 +57,13 @@ while(cislo!=0){
   return des;
 }
 
-void nacitanie(int r, int s){
+void nacitanie(int r, int s){ //funkcia nacitanie
 
 FILE *subor;
 int i, j, cislo;
 
 subor = fopen("subor.txt", "r");
 
-printf("Toto je tvoja matica v desiatkovej sustave.\n");
 for (i=0;i<r;i++){
     for (j=0;j<s;j++){
         fscanf(subor, "%d", &cislo);
