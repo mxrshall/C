@@ -8,9 +8,9 @@ void nacitanie(int r, int s);
 int main(void){
 
 FILE *subor;
-int mat[MAX][MAX];
+int mat[MAX][MAX], r, s; //matica, riadok, stlpec
 long long cislo;
-int r, s, i, j; //riadok, stlpec
+int i, j;
 
 while(r<1 || s<1){
     printf("Zadaj pocet riadkov: ");
@@ -27,7 +27,7 @@ for(i=0;i<r;i++){
     }
 }
 
-subor = fopen("subor.txt", "w"); //zapis
+subor = fopen("subor.txt", "w"); //zapis do suboru
 
 for(i=0;i<r;i++){
     for(j=0;j<s;j++){
@@ -60,14 +60,18 @@ while(cislo!=0){
 void nacitanie(int r, int s){ //funkcia nacitanie
 
 FILE *subor;
-int i, j, cislo;
+int i, j, diagonala, cislo;
 
 subor = fopen("subor.txt", "r");
 
 for (i=0;i<r;i++){
     for (j=0;j<s;j++){
         fscanf(subor, "%d", &cislo);
-        printf("%d\t", premena(cislo));    
+        printf("%d\t", premena(cislo)); 
+        if(i==j){
+            diagonala=premena(cislo);
+            printf("%d\n", diagonala);
+        } 
     }
     printf("\n");
 }

@@ -1,5 +1,4 @@
-Toto su tvoje prvky v dvojkovej sustave.
-1110
+1101
 1111
-1100
-1011
+11
+1001
