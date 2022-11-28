@@ -4,6 +4,7 @@
 
 int premena(long long cislo);
 void nacitanie(int r, int s);
+void porovnavanie(int r, int s);
 
 int main(void){
 
@@ -39,6 +40,7 @@ fclose(subor);
 
 printf("Toto je tvoja matica v desiatkovej sustave.\n");
 nacitanie(r, s);
+porovnavanie(r, s);
     
     return 0;
 }
@@ -60,7 +62,7 @@ while(cislo!=0){
 void nacitanie(int r, int s){ //funkcia nacitanie
 
 FILE *subor;
-int i, j, diagonala, cislo;
+int i, j, cislo;
 
 subor = fopen("subor.txt", "r");
 
@@ -68,10 +70,6 @@ for (i=0;i<r;i++){
     for (j=0;j<s;j++){
         fscanf(subor, "%d", &cislo);
         printf("%d\t", premena(cislo)); 
-        if(i==j){
-            diagonala=premena(cislo);
-            printf("%d\n", diagonala);
-        } 
     }
     printf("\n");
 }
@@ -79,4 +77,38 @@ for (i=0;i<r;i++){
 fclose(subor);
 }
 
+void porovnavanie(int r, int s){ //funkcia porovnavanie
 
+FILE *subor;
+int i, j, diagonala[MAX], mat[MAX][MAX], cislo;
+
+subor = fopen("subor.txt", "r");
+
+for (i=0;i<r;i++){
+    for (j=0;j<s;j++){
+        fscanf(subor, "%d", &cislo);
+        cislo=premena(cislo); 
+        if(i==j){
+            diagonala[i]=cislo;
+        } 
+        mat[i][j]=cislo;
+    }
+}
+
+for (i=0;i<r;i++){
+    for (j=0;j<s;j++){
+        cislo=mat[i][j];
+        if(cislo>diagonala[i]){
+            printf("%d je vacsie ako cislo na diagonale.\n", cislo);
+        }
+        if(cislo<diagonala[i]){
+            printf("%d je mensie ako cislo na diagonale.\n", cislo);
+        }
+        if(cislo==diagonala[i]){
+            printf("%d je rovnake ako cislo na diagonale.\n", cislo);
+        }
+    }
+}
+
+fclose(subor);
+}
