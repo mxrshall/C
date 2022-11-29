@@ -3,25 +3,24 @@
 #define MAX 100
 
 int premena(long long cislo);
-void nacitanie(int r, int s);
-void porovnavanie(int r, int s);
+void nacitanie(int r);
+void porovnavanie(int r);
 
 int main(void){
 
 FILE *subor;
-int mat[MAX][MAX], r, s; //matica, riadok, stlpec
+int mat[MAX][MAX], r; //matica, rozmer
 long long cislo;
 int i, j;
 
-while(r<1 || s<1){
-    printf("Zadaj pocet riadkov: ");
+while(r<2){
+    printf("Zadaj rozmer matice: ");
     scanf("%d", &r);
-    printf("Zadaj pocet stlpcov: ");
-    scanf("%d", &s);
+
 }
 
 for(i=0;i<r;i++){
-    for(j=0;j<s;j++){
+    for(j=0;j<r;j++){
         printf("Zadaj prvok matice v dvojkovej sustave[%d][%d]\n", i, j);
         scanf("%lld", &cislo);
         mat[i][j]=cislo;
@@ -31,7 +30,7 @@ for(i=0;i<r;i++){
 subor = fopen("subor.txt", "w"); //zapis do suboru
 
 for(i=0;i<r;i++){
-    for(j=0;j<s;j++){
+    for(j=0;j<r;j++){
         fprintf(subor, "%d\n", mat[i][j]);    
     }
 }
@@ -39,8 +38,8 @@ for(i=0;i<r;i++){
 fclose(subor);
 
 printf("Toto je tvoja matica v desiatkovej sustave.\n");
-nacitanie(r, s);
-porovnavanie(r, s);
+nacitanie(r);
+porovnavanie(r);
     
     return 0;
 }
@@ -59,7 +58,7 @@ while(cislo!=0){
   return des;
 }
 
-void nacitanie(int r, int s){ //funkcia nacitanie
+void nacitanie(int r){ //funkcia nacitanie
 
 FILE *subor;
 int i, j, cislo;
@@ -67,7 +66,7 @@ int i, j, cislo;
 subor = fopen("subor.txt", "r");
 
 for (i=0;i<r;i++){
-    for (j=0;j<s;j++){
+    for (j=0;j<r;j++){
         fscanf(subor, "%d", &cislo);
         printf("%d\t", premena(cislo)); 
     }
@@ -77,7 +76,7 @@ for (i=0;i<r;i++){
 fclose(subor);
 }
 
-void porovnavanie(int r, int s){ //funkcia porovnavanie
+void porovnavanie(int r){ //funkcia porovnavanie
 
 FILE *subor;
 int i, j, diagonala[MAX], mat[MAX][MAX], cislo;
@@ -85,7 +84,7 @@ int i, j, diagonala[MAX], mat[MAX][MAX], cislo;
 subor = fopen("subor.txt", "r");
 
 for (i=0;i<r;i++){
-    for (j=0;j<s;j++){
+    for (j=0;j<r;j++){
         fscanf(subor, "%d", &cislo);
         cislo=premena(cislo); 
         if(i==j){
@@ -96,7 +95,7 @@ for (i=0;i<r;i++){
 }
 
 for (i=0;i<r;i++){
-    for (j=0;j<s;j++){
+    for (j=0;j<r;j++){
         cislo=mat[i][j];
         if(cislo>diagonala[i]){
             printf("%d je vacsie ako cislo na diagonale.\n", cislo);
