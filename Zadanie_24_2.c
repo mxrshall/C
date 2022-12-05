@@ -3,7 +3,7 @@
 #include <math.h>
 #define MAX 15
 
-void nacitanie_do_suboru(int r, int *mat);
+void nacitanie_do_suboru(int p, int *mat);
 int prevod(long long cislo);
 void nacitanie_matice(int r);
 
@@ -34,7 +34,7 @@ for(i=1;i<=r;i++){
     }
 }
 
-nacitanie_do_suboru(r, mat);
+nacitanie_do_suboru(p, mat);
 printf("Toto je tvoja matica v desiatkovej sustave.\n");
 nacitanie_matice(r);
 
@@ -42,21 +42,19 @@ free(mat);
 return 0;
 }
 
-void nacitanie_do_suboru(int r, int *mat){ //zapis do suboru
+void nacitanie_do_suboru(int p, int *mat){ //zapis do suboru
 
 FILE *subor;
-int i, j, p=0;
+int i=0;
 
 subor = fopen("subor.txt", "w");
 if(subor==NULL){
     printf("Chyba pri otvarani suboru.");
 }
 
-for(i=1;i<=r;i++){
-    for(j=1;j<=r;j++){
-        fprintf(subor, "%d\n", mat[p]);
-        p++;    
-    }
+while(i!=p){
+    fprintf(subor, "%d\n", mat[i]);
+    i++;    
 }
 
 fclose(subor);
