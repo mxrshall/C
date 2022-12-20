@@ -1,38 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void vystup(int hodnota, int *pole);
-
 int main(){
 
-int hodnota, cislo, *pole;
+int i, j, cislo, riadok, stlpec;
+int **pole;
 
-printf("Zadaj hodnotu: ");
-scanf("%d", &hodnota);
+printf("Riadok: ");
+scanf("%d", &riadok);
+printf("Stlpec: ");
+scanf("%d", &stlpec);
 
-pole = (int*) malloc(hodnota * sizeof(int));
-if(pole==NULL){
-    printf("Chyba");
-    return 1;
+pole = (int**)malloc(riadok * sizeof(int*));
+
+for(int i=0;i<riadok;i++){
+    pole[i] = (int*)malloc(stlpec * sizeof(int));
 }
 
-for(int i=0;i<hodnota;i++){
-    printf("Zadaj cislo: ");
-    scanf("%d", &cislo);
-    pole[i]=cislo;
+for(i=0;i<riadok;i++){
+    for(j=0;j<stlpec;j++){
+        printf("Zadaj cislo: ");
+        scanf("%d", &cislo);
+        pole[i][j]=cislo;
+    }
 }
 
-vystup(hodnota, pole);
+for(i=0;i<riadok;i++){
+    for(j=0;j<stlpec;j++){
+        printf("%d", pole[i][j]);
+        printf("\t");
+    }
+    printf("\n");
+}
+
+for(i=0;i<riadok;i++){
+    free(pole[i]);
+}
 
 free(pole);
 
   return 0;
-}
-
-void vystup(int hodnota, int *pole){
-
-for(int i=0;i<hodnota;i++){
-    printf("%d\n", pole[i]);
-}
-
 }

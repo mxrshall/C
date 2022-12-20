@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define MAX 15
 
 void nacitanie_do_suboru(int p, int *mat);
 int prevod(long long cislo);
@@ -11,7 +10,6 @@ int main(void){
 
 FILE *subor;
 int *mat, r=0; //matica, rozmer
-long long cislo;
 int i, j, p=0;
 
 while(r<2){
@@ -28,8 +26,7 @@ if(mat==NULL){
 for(i=1;i<=r;i++){
     for(j=1;j<=r;j++){
         printf("Zadaj prvok matice v dvojkovej sustave[%d][%d]\n", i, j);
-        scanf("%lld", &cislo);
-        mat[p]=cislo;
+        scanf("%d", &mat[p]);
         p++;
     }
 }
@@ -79,11 +76,12 @@ void nacitanie_matice(int r){ //funkcia nacitanie
 
 FILE *subor;
 long long cislo;
-int i, j, p=0, diagonala[MAX], *des;
+int i, j, p=0, diagonala[r], *des;
 
 subor = fopen("subor.txt", "r");
 if(subor==NULL){
     printf("Chyba pri otvarani suboru.");
+    exit(1);
 }
 
 des = (int*)malloc(r*r * sizeof(int));
