@@ -1,48 +1,66 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
-#define MAX 50
 
+void nacitanie_do_suboru(int p, int *mat);
 int prevod(long long cislo);
 void nacitanie_matice(int r);
 
 int main(void){
 
 FILE *subor;
-int mat[MAX][MAX], r; //matica, rozmer
-long long cislo;
-int i, j;
+int *mat, r=0; //matica, rozmer
+int i, j, p=0;
 
-while(r<2){
-    printf("Zadaj rozmer matice: ");
-    scanf("%d", &r);
+mat = (int*)malloc(r*r * sizeof(int));
+if(mat==NULL){
+    printf("Chyba pri alokacii");
+    return 1;
 }
+
+FILE *subor = fopen("subor.txt", "r");
+int znak = getc(subor);
+while (znak!=EOF){ 
+    putchar(znak); 
+    znak = getc(znak);
+  }
+
+fclose(subor);
 
 for(i=1;i<=r;i++){
     for(j=1;j<=r;j++){
         printf("Zadaj prvok matice v dvojkovej sustave[%d][%d]\n", i, j);
-        scanf("%lld", &cislo);
-        mat[i][j]=cislo;
+        scanf("%d", &mat[p]);
+        p++;
     }
 }
 
-subor = fopen("subor.txt", "w"); //zapis do suboru
+nacitanie_do_suboru(p, mat);
+printf("Toto je tvoja matica v desiatkovej sustave.\n");
+nacitanie_matice(r);
+
+free(mat);
+return 0;
+}
+
+void nacitanie_do_suboru(int p, int *mat){ //zapis do suboru
+
+FILE *subor;
+int i=0;
+
+subor = fopen("subor.txt", "w");
 if(subor==NULL){
     printf("Chyba pri otvarani suboru.");
 }
 
-for(i=1;i<=r;i++){
-    for(j=1;j<=r;j++){
-        fprintf(subor, "%d\n", mat[i][j]);    
-    }
+while(i!=p){
+    fprintf(subor, "%d\n", mat[i]);
+    i++;    
 }
 
 fclose(subor);
-
-printf("Toto je tvoja matica v desiatkovej sustave.\n");
-nacitanie_matice(r);
-    
-    return 0;
 }
+
 
 int prevod(long long cislo){ //funkcia premena
 
@@ -62,11 +80,17 @@ void nacitanie_matice(int r){ //funkcia nacitanie
 
 FILE *subor;
 long long cislo;
-int i, j, diagonala[MAX], mat[MAX][MAX];
+int i, j, p=0, diagonala[r], *des;
 
 subor = fopen("subor.txt", "r");
 if(subor==NULL){
     printf("Chyba pri otvarani suboru.");
+    exit(1);
+}
+
+des = (int*)malloc(r*r * sizeof(int));
+if(des==NULL){
+    printf("Chyba pri alokacii");
 }
 
 for (i=1;i<=r;i++){
@@ -77,25 +101,28 @@ for (i=1;i<=r;i++){
         if(i==j){
             diagonala[i]=cislo;
         } 
-        mat[i][j]=cislo; 
+        des[p]=cislo;
+        p++; 
     }
     printf("\n");
 }
-
+p=0;
 for(i=1;i<=r;i++){
     for(j=1;j<=r;j++){
-        cislo=mat[i][j];
+        cislo=des[p];
         if(cislo>diagonala[i]){
-            printf("%d je vacsie ako cislo na diagonale.\n", cislo);
+            printf("%d je vacsie ako prvok na diagonale.\n", cislo);
         }
         if(cislo<diagonala[i]){
-            printf("%d je mensie ako cislo na diagonale.\n", cislo);
+            printf("%d je mensie ako prvok na diagonale.\n", cislo);
         }
         if(cislo==diagonala[i]){
-            printf("%d je rovnake ako cislo na diagonale.\n", cislo);
+            printf("%d je rovnake prvok na diagonale.\n", cislo);
         }
+        p++;
     }
 }
 
+free(des);
 fclose(subor);
 }
