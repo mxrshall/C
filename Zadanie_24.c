@@ -2,65 +2,50 @@
 #include <stdlib.h>
 #include <math.h>
 
-void nacitanie_do_suboru(int p, int *mat);
 int prevod(long long cislo);
 void nacitanie_matice(int r);
 
 int main(void){
 
 FILE *subor;
-int *mat, r=0; //matica, rozmer
+int r; // rozmer
 int i, j, p=0;
+char c;
+int **mat;
+int cislo;
 
-mat = (int*)malloc(r*r * sizeof(int));
-if(mat==NULL){
-    printf("Chyba pri alokacii");
-    return 1;
-}
-
-FILE *subor = fopen("subor.txt", "r");
-int znak = getc(subor);
-while (znak!=EOF){ 
-    putchar(znak); 
-    znak = getc(znak);
-  }
-
-fclose(subor);
-
-for(i=1;i<=r;i++){
-    for(j=1;j<=r;j++){
-        printf("Zadaj prvok matice v dvojkovej sustave[%d][%d]\n", i, j);
-        scanf("%d", &mat[p]);
+subor = fopen("subor.txt", "r");
+for (c = getc(subor); c != EOF; c = getc(subor)){
+    if (c == '\n'){
         p++;
     }
 }
+p++;
+fclose(subor);
 
-nacitanie_do_suboru(p, mat);
-printf("Toto je tvoja matica v desiatkovej sustave.\n");
-nacitanie_matice(r);
+do{
+printf("Zadaj rozmer matice: ");
+scanf("%d", &r);
+}while(r*r!=p || r<2);
 
-free(mat);
+mat = (int**)malloc(r * sizeof(int*));
+
+for(i=0;i<r;i++){
+    mat[i] = (int*)malloc(r * sizeof(int));
+}
+
+subor = fopen("subor.txt", "r");
+for (i=0;i<r;i++){
+    for (j=0;j<r;j++){
+        fscanf(subor, "%d", &mat[i][j]);
+        printf("%d\t", mat[i][j]);
+    }
+    printf("\n");
+}
+fclose(subor);
+
 return 0;
 }
-
-void nacitanie_do_suboru(int p, int *mat){ //zapis do suboru
-
-FILE *subor;
-int i=0;
-
-subor = fopen("subor.txt", "w");
-if(subor==NULL){
-    printf("Chyba pri otvarani suboru.");
-}
-
-while(i!=p){
-    fprintf(subor, "%d\n", mat[i]);
-    i++;    
-}
-
-fclose(subor);
-}
-
 
 int prevod(long long cislo){ //funkcia premena
 

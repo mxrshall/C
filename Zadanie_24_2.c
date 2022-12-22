@@ -12,10 +12,10 @@ FILE *subor;
 int *mat, r=0; //matica, rozmer
 int i, j, p=0;
 
-while(r<2){
+do{
     printf("Zadaj rozmer matice: ");
     scanf("%d", &r);
-}
+}while(r<2);
 
 mat = (int*)malloc(r*r * sizeof(int));
 if(mat==NULL){
