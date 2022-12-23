@@ -3,7 +3,7 @@
 #include <math.h>
 
 int prevod(long long cislo);
-void nacitanie_matice(int r);
+void nacitanie_matice(int r, int **mat);
 
 int main(void){
 
@@ -26,6 +26,12 @@ fclose(subor);
 do{
 printf("Zadaj rozmer matice: ");
 scanf("%d", &r);
+if(r*r!=p){
+    printf("Rozmer sa nezhoduje s poctom prvkov.\n");
+}
+if(r<2){
+    printf("Rozmer je mensi ako dva.\n");
+}
 }while(r*r!=p || r<2);
 
 mat = (int**)malloc(r * sizeof(int*));
@@ -38,11 +44,11 @@ subor = fopen("subor.txt", "r");
 for (i=0;i<r;i++){
     for (j=0;j<r;j++){
         fscanf(subor, "%d", &mat[i][j]);
-        printf("%d\t", mat[i][j]);
     }
-    printf("\n");
 }
 fclose(subor);
+
+nacitanie_matice(r, mat);
 
 return 0;
 }
@@ -61,53 +67,15 @@ while(cislo!=0){
   return des;
 }
 
-void nacitanie_matice(int r){ //funkcia nacitanie
+void nacitanie_matice(int r, int **mat){ //funkcia nacitanie
 
-FILE *subor;
-long long cislo;
-int i, j, p=0, diagonala[r], *des;
+int i, j, diagonala[r];
 
-subor = fopen("subor.txt", "r");
-if(subor==NULL){
-    printf("Chyba pri otvarani suboru.");
-    exit(1);
-}
-
-des = (int*)malloc(r*r * sizeof(int));
-if(des==NULL){
-    printf("Chyba pri alokacii");
-}
-
-for (i=1;i<=r;i++){
-    for (j=1;j<=r;j++){
-        fscanf(subor, "%lld", &cislo);
-        cislo=prevod(cislo);
-        printf("%d\t", cislo);
-        if(i==j){
-            diagonala[i]=cislo;
-        } 
-        des[p]=cislo;
-        p++; 
+for (i=0;i<r;i++){
+    for (j=0;j<r;j++){
+        printf("%d\t", mat[i][j]);
     }
     printf("\n");
 }
-p=0;
-for(i=1;i<=r;i++){
-    for(j=1;j<=r;j++){
-        cislo=des[p];
-        if(cislo>diagonala[i]){
-            printf("%d je vacsie ako prvok na diagonale.\n", cislo);
-        }
-        if(cislo<diagonala[i]){
-            printf("%d je mensie ako prvok na diagonale.\n", cislo);
-        }
-        if(cislo==diagonala[i]){
-            printf("%d je rovnake prvok na diagonale.\n", cislo);
-        }
-        p++;
-    }
-}
 
-free(des);
-fclose(subor);
 }
