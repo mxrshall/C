@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-int prevod(long long cislo);
+int prevod(int cislo);
 void nacitanie_matice(int r, int **mat);
 
 int main(void){
@@ -53,7 +53,7 @@ nacitanie_matice(r, mat);
 return 0;
 }
 
-int prevod(long long cislo){ //funkcia premena
+int prevod(int cislo){ //funkcia premena
 
 int des=0, i=0, posledne;
 
@@ -69,13 +69,34 @@ while(cislo!=0){
 
 void nacitanie_matice(int r, int **mat){ //funkcia nacitanie
 
-int i, j, diagonala[r];
+int i, j, diagonala[r], cislo;
 
 for (i=0;i<r;i++){
     for (j=0;j<r;j++){
-        printf("%d\t", mat[i][j]);
+        cislo=mat[i][j];
+        cislo=prevod(cislo);
+        printf("%d\t", cislo);
+        if(i==j){
+            diagonala[i]=cislo;
+        }
+        mat[i][j]=cislo;
     }
     printf("\n");
+}
+
+for(i=0;i<r;i++){
+    for(j=0;j<r;j++){
+        cislo=mat[i][j];
+        if(cislo>diagonala[i]){
+            printf("%d je vacsie ako prvok na diagonale.\n", cislo);
+        }
+        if(cislo<diagonala[i]){
+            printf("%d je mensie ako prvok na diagonale.\n", cislo);
+        }
+        if(cislo==diagonala[i]){
+            printf("%d je rovnake prvok na diagonale.\n", cislo);
+        }
+    }
 }
 
 }
