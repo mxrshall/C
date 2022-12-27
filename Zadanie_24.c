@@ -8,11 +8,9 @@ void nacitanie_matice(int r, int **mat);
 int main(void){
 
 FILE *subor;
-int r; // rozmer
-int i, j, p=0;
+int r, i, j, p=0;
 char c;
-int **mat;
-int cislo;
+int **mat, cislo, posledne;
 
 subor = fopen("subor.txt", "r");
 for (c = getc(subor); c != EOF; c = getc(subor)){
@@ -21,6 +19,20 @@ for (c = getc(subor); c != EOF; c = getc(subor)){
     }
 }
 p++;
+fclose(subor);
+
+subor = fopen("subor.txt", "r");
+for(i=0;i<p;i++){
+    fscanf(subor, "%d", &cislo);
+    while(cislo!=0){
+        posledne=cislo%10;
+        cislo=cislo/10;
+        if(posledne>1){
+            printf("Chyba\n");
+        }
+    }
+    i++;
+}
 fclose(subor);
 
 do{
